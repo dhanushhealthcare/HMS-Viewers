@@ -93,7 +93,12 @@ function WorkList({
   const sortModifier = sortDirection === 'descending' ? 1 : -1;
   const defaultSortValues =
     shouldUseDefaultSort && canSort ? { sortBy: 'studyDate', sortDirection: 'ascending' } : {};
-  const sortedStudies = studies;
+  // const sortedStudies = studies;
+  const sortedStudies = filterStudiesByPatientId(studies, queryFilterValues.patientId);
+  function filterStudiesByPatientId(studies, pId) {
+    const data = studies.filter(study => study.patientName === pId);
+    return data.length > 0 ? data : studies;
+  }
 
   if (canSort) {
     studies.sort((s1, s2) => {
@@ -605,6 +610,7 @@ const defaultFilterValues = {
   resultsPerPage: 25,
   datasources: '',
   configUrl: null,
+  patientId: null,
 };
 
 function _tryParseInt(str, defaultValue) {
@@ -631,9 +637,10 @@ function _getQueryFilterValues(params) {
     sortBy: params.get('sortby'),
     sortDirection: params.get('sortdirection'),
     pageNumber: _tryParseInt(params.get('pagenumber'), undefined),
-    resultsPerPage: _tryParseInt(params.get('resultsPerPage'), undefined),
+    resultsPerPage: _tryParseInt(params.get('resultsperpage'), undefined),
     datasources: params.get('datasources'),
     configUrl: params.get('configurl'),
+    patientId: params.get('patientId'),
   };
 
   // Delete null/undefined keys

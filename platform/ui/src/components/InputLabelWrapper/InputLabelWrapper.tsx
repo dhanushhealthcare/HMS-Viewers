@@ -48,7 +48,7 @@ const InputLabelWrapper = ({
           />
         )}
       </span>
-      <span>{children}</span>
+      {/* <span>{children}</span> */}
     </label>
   );
 };

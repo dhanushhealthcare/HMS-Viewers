@@ -12,16 +12,18 @@ const InputText = ({ id, label, isSortable, sortDirection, onLabelClick, value, 
       sortDirection={sortDirection}
       onLabelClick={onLabelClick}
     >
-      <Input
-        id={id}
-        className="mt-2"
-        type="text"
-        containerClassName="mr-2"
-        value={value}
-        onChange={event => {
-          onChange(event.target.value);
-        }}
-      />
+      <span style={{ display: 'none' }}>
+        <Input
+          id={id}
+          className="mt-2"
+          type="text"
+          containerClassName="mr-2"
+          value={value}
+          onChange={event => {
+            onChange(event.target.value);
+          }}
+        />
+      </span>
     </InputLabelWrapper>
   );
 };
